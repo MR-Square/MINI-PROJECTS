@@ -1,9 +1,9 @@
+import pyttsx3          # text-to-speech conversion library,works offline as well
 from http import server
 import smtplib
 import os
 from tkinter import EXCEPTION
 from flask import request
-import pyttsx3
 import speech_recognition as sr
 import wikipedia
 import webbrowser
@@ -20,16 +20,20 @@ import time
 
 
 
-engine=pyttsx3.init('sapi5')
+engine=pyttsx3.init('sapi5')        # sepi5 is for windows.for mac it is nsss
+'''The pyttsx3 module supports two voices first is female and the second is male which is provided by “sapi5”'''
 voices=engine.getProperty('voices')
 engine.setProperty('voices',voices[0].id)
 
 #Text to speech
 def speak(audio):
+    '''This function is for speak the text which is passed as parameter.'''
     engine.say(audio)
+    # .say() method is used to speak the text which is passed as argument.
     engine.runAndWait()
 
 def wishMe():
+    '''This function is for greeting the user.It will run only first time.'''
     hour=int(datetime.datetime.now().hour)
     if hour>=6 and hour<12:
         speak("Good morning")
