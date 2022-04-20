@@ -1,10 +1,10 @@
 import pyttsx3          # text-to-speech conversion library,works offline as well
-from http import server
+import speech_recognition as sr     
 import smtplib
+from http import server
 import os
 from tkinter import EXCEPTION
 from flask import request
-import speech_recognition as sr
 import wikipedia
 import webbrowser
 import datetime
@@ -45,7 +45,8 @@ def wishMe():
     speak("I am  Prototype 1,how may i help you ")
 
 #To convert voice into text
-def takeCommand():      
+def takeCommand():  
+    '''This function is for recognizing the voice of user and converting it into text.'''    
     r=sr.Recognizer()
     with sr.Microphone() as source:
         print("Listening..")
@@ -65,11 +66,16 @@ def takeCommand():
     return query
 
 def  sendEmail(to, content):
+    '''This function is for send e-mail to any person using smtplib module.'''
     server=smtplib.SMTP('smtp.gmail.com', 587)
+    # here we are using gmail SMTP(Simple Mail Transfer Protocol) server port number is 587.
     server.ehlo()
     server.starttls()
-    server.login('zakkiwork732.gmail.com','z@kkiworks786')
+    server.login('zakkiwork732.gmail.com','z@kkiworks786')      # very less secure.
     server.sendmail('zakkiwork732.gmail.com',to,content)
+    # first parameter is sender-mailID, 
+    # second parameter is reciever-mailID, 
+    # third parameter is message which have to send.
     server.close()   
 
 def news():
@@ -86,6 +92,7 @@ def news():
     for i in range (len(day)):
         #print(f"Today's {day[i]} nes is: {head[i]}")
         speak(f"Today's {day[i]} news is: {head[i]}")
+        
 if __name__=="main__":
     wishMe()
     while True:
