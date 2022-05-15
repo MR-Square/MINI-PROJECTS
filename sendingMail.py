@@ -1,3 +1,6 @@
+''''This is a row program to send a mail using voice assitant.this is for understanding purpose only.'''
+import smtplib
+
 def  sendEmail(senderId,password,recieverId, content):
     '''This function is for send e-mail to any person using smtplib module.'''
     server=smtplib.SMTP('smtp.gmail.com', 587)
